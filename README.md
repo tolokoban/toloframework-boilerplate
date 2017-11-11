@@ -12,20 +12,23 @@ Convert XML files into toloframework modules.
 
 ```js
 { name: "view", chidren: [
-  { name="item", attribs: { name: "foo" } }
+  { name: "item", attribs: { name: "foo" } }
 ]}
 ```
 
 ### Using namespaces
 ```xml
-<view xmlns:x="class:org.tolokoban.views.input">
-  <x:date/>
+<view xmlns:x="class:org.tolokoban.views.input"
+      xmlns:best="https://best-website-in-the-world.net">
+  <x:date/ best:type="foobar">
 </view>
 ```
 
 ```js
 { name: "view", children: [
-  { name: "date", ns: "class:org.tolokoban.views.input" }
+  { name: "date", ns: "class:org.tolokoban.views.input", attribs: {
+    "https://best-website-in-the-world.net:type": "foobar"
+  }}
 ]}
 ```
 
