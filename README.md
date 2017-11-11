@@ -74,7 +74,7 @@ Both give this JS object:
   a: [
     "foo",
     "bar",
-    { y: "7", x: [{ value: "9"}, "11"] }
+    { y: 7, x: [{ value: 9}, 11] }
   ]
 }}
 ```
@@ -85,14 +85,14 @@ Both give this JS object:
 <div class="[touchable, 666]"/>
 ```
 ```js
-{ name: "div", attribs: { class: ["touchable", "666"] } }
+{ name: "div", attribs: { class: ["touchable", 666] } }
 ```
 #### Objects
 ```xml
 <div a="{x:666, y:yok}"/>
 ```
 ```js
-{ name: "div", attribs: { a: { x: "666", y: "yok" } } }
+{ name: "div", attribs: { a: { x: 666, y: "yok" } } }
 ```
 #### Long strings
 ```xml
@@ -126,7 +126,7 @@ Both give this JS object:
 <div att="{Link converter:boolean selected}"/>
 ```
 ```js
-{ name: "div", att: { $0: "Link", converter: "boolean", $1: "selected" } }
+{ name: "div", attribs: { att: { $0: "Link", converter: "boolean", $1: "selected" } } }
 ```
 Missing keys are replaces with `$n` where `n` starts from 0.
 
@@ -153,7 +153,7 @@ If you give a content, you can't give attributes because the parser don't know i
 Both give the same JS object:
 ```js
 { name: "view", children: [
-  { name: "item", stick: { grid: { row: "3" } } }
+  { name: "item", stick: { grid: { row: 3 } } }
 ]}
 ```
 Stickers can be as complex as attributes.
