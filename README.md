@@ -76,15 +76,58 @@ Both give this JS object:
 }}
 ```
 
-## Short syntax for attributes with complex types
+### Short syntax for attributes with complex types
+#### Arrays
 ```xml
 <div class="[touchable, 666]"/>
 ```
 ```js
 { name: "div", attribs: { class: ["touchable", "666"] } }
 ```
+#### Objects
+```xml
+<div a="{x:666, y:yok}"/>
+```
+```js
+{ name: "div", attribs: { a: { x: "666", y: "yok" } } }
+```
+#### Long strings
+```xml
+<div a="{name: 'Linus Torvald'}"/>
+<div license="{text: 'It\'s free!'}"/>
+```
+#### Nested types
+```xml
+<div att="{ headers: [Product, {label: Price, align: right}] }"/>
+```
+```js
+{ name: "div", attribs: { att: {
+  headers: [
+    "Prouct",
+    { label: "Price", align: "right" }
+  ]
+}}}
+```
+#### Commas are optional in arrays
+```xml
+<div class="[touchable, 666]"/>
+<div class="[touchable 666]"/>
+```
+#### Commas are optional in objects
+```xml
+<div a="{x:666, y:yok}"/>
+<div a="{x:666 y:yok}"/>
+```
+#### Keys are optional
+```xml
+<div att="{Link converter:boolean selected}"/>
+```
+```js
+{ name: "div", att: { $0: "Link", converter: "boolean", $1: "selected" } }
+```
+Missing keys are replaces with `$n` where `n` starts from 0.
 
-## Don't mix syntaxes for attributes
+### Don't mix syntaxes for attributes
 __This is not allowed:__
 ```js
 <div.att x="36">47</div.att>
