@@ -84,6 +84,12 @@ Both give this JS object:
 ```xml
 <div class="[touchable, 666]"/>
 ```
+```xml
+<div>
+  <div.class>[touchable, 666]</div.class>
+</div>
+```
+Both give this JS object:
 ```js
 { name: "div", attribs: { class: ["touchable", 666] } }
 ```
