@@ -62,6 +62,9 @@ var Tag = require("tfw.binding.tag");
 var PropertyManager = require("tfw.binding.property-manager");
 
 module.exports = function(dataContext) {
+  if( typeof dataContext !== 'object' ) dataContext = {};
+  Object.defineProperty( this, "dataContext", {
+    value: dataContext, writable: false, enumerable: true, configurable: false } );    
   var that = this;
   var e1 = new Tag({ class: "tfw-view-checkbox" });
   var e2 = new Tag({ class: "text" });
@@ -71,7 +74,6 @@ module.exports = function(dataContext) {
   e1.add( e2, e3 );
   Object.defineProperty( this, "$", {
     value: e1, writable: false, enumerable: true, configurable: false } );    
-  if( typeof dataContext !== 'object' ) return;
   e1.addEventListener("pointerdown", function() {
     that.dataContext.value = that.dataContext.value ? false : true;
   });  
@@ -88,4 +90,11 @@ module.exports = function(dataContext) {
   });
 }
 ```
-
+----
+Permissive JSON:
+```js
+{view [
+  {tfw.view.checkbox x:name: chk, text: "Button is enabled"}
+  {BUTTON class.enabled: {link value data: chk}}
+]}
+```
