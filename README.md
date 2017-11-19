@@ -94,7 +94,21 @@ module.exports = function(dataContext) {
 Permissive JSON:
 ```js
 {view [
-  {tfw.view.checkbox x:name: chk, text: "Button is enabled"}
-  {BUTTON class.enabled: {link value data: chk}}
+  {tfw.view.checkbox x:name: chk, text: "Button is enabled", value: {link enabled}}
+  {BUTTON class.enabled: {link enabled}}
+]}
+```
+----
+Permissive JSON:
+```js
+// dataContext == { pois: [{ grp: '', txt: ''}, ...] }
+{view x.content: {array
+  source: {link pois, converter: makeTreeByGroups}
+  template: {tfw.view.expandable text: {link: grp} content: {UL
+    x.content: {array
+      source: {link list}
+      template: {LI textContent: {link txt}}
+    }
+  }}
 ]}
 ```
