@@ -15,17 +15,31 @@ The `viewDescription` argument is an object with this mandatory attribute: `view
 ## Examples
 Permissive JSON:
 ```js
-{view [
-  {P ["Hello world!"]}
-]}
+{view ["Hello world!"]}
 ```
 Generated code:
 ```js
 var Tag = require("tfw.binding.tag");
 
 module.exports = function() {
-  var e1 = new Tag("p", ["textContent"]);
-  e1.textContent = "Hello world!";
+  var e1 = new Tag("div");
+  var e2 = document.createTextNode("Hello world!");
+  e1.appendShild( e2 );
+  Object.defineProperty( this, "$", {
+    value: e1, writable: false, enumerable: true, configurable: false } );
+}
+```
+Permissive JSON:
+```js
+{view P ["Hello world!"]}
+```
+Generated code:
+```js
+var Tag = require("tfw.binding.tag");
+
+module.exports = function() {
+  var e2 = document.createTextNode("Hello world!");
+  e1.appendShild( e2 );
   Object.defineProperty( this, "$", {
     value: e1, writable: false, enumerable: true, configurable: false } );
 }
