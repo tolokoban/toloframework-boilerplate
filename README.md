@@ -1,5 +1,5 @@
 # toloframework-boilerplate
-Convert XML files into toloframework modules.
+Convert Permissive JSON files (jsnx) into toloframework modules.
 
 ## Parsing XML
 
