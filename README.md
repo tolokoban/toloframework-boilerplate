@@ -7,7 +7,7 @@ In MVVM pattern, views only know about ViewModel also known as DataContext.
 ## Usage
 ```js
 var Boilerplate = require("./toloframework-boilerplate");
-var code = Boilerplate.generateCodeFrom( viewDescription );
+var code = Boilerplate.generateCodeFrom( viewDefinition, codeBehind );
 ```
 
 The `viewDescription` argument is an object with this mandatory attribute: `viewDescription["0"] === 'view'`.
