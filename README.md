@@ -30,3 +30,27 @@ module.exports = function() {
     value: e1, writable: false, enumerable: true, configurable: false } );
 }
 ```
+----
+Permissive JSON:
+```js
+{view [
+  {DIV class: tfw.view.checkbox
+       class.reversed: {link reversed}
+       class.selected: {link value} [
+    {DIV class: text, textContent: {link text}}
+    {DIV class: base [{DIV class: point}]}
+  ]}
+]}
+```
+Generated code:
+```js
+var Tag = require("tfw.binding.tag");
+
+module.exports = function() {
+  var e1 = new Tag("p", ["textContent"]);
+  e1.textContent = "Hello world!";
+  Object.defineProperty( this, "$", {
+    value: e1, writable: false, enumerable: true, configurable: false } );
+}
+```
+
