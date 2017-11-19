@@ -38,6 +38,7 @@ Generated code:
 var Tag = require("tfw.binding.tag");
 
 module.exports = function() {
+  var e1 = new Tag("P");
   var e2 = document.createTextNode("Hello world!");
   e1.appendShild( e2 );
   Object.defineProperty( this, "$", {
@@ -47,14 +48,12 @@ module.exports = function() {
 ----
 Permissive JSON:
 ```js
-{view [
-  {DIV class: tfw.view.checkbox
-       class.reversed: reversed
-       class.selected: value
-       event.pointerdown: {toggle value} [
-    {DIV class: text, textContent: {link text}}
-    {DIV class: base [{DIV class: point}]}
-  ]}
+{view class: tfw-view-checkbox
+      class.reversed: reversed
+      class.selected: value
+      event.pointerdown: {toggle value} [
+  {DIV class: text, textContent: {link text}}
+  {DIV class: base [{DIV class: point}]}
 ]}
 ```
 Generated code:
@@ -64,27 +63,28 @@ var PropertyManager = require("tfw.binding.property-manager");
 
 module.exports = function(dataContext) {
   var that = this;
-  var e1 = new Tag("div", ["class"]);
-  e1.class = "tfw.view.checkbox";
+  var e1 = new Tag({ class: "tfw-view-checkbox" });
+  var e2 = new Tag({ class: "text" });
+  var e3 = new Tag({ class: "base" });
+  var e4 = new Tag({ class: "point" });
+  e3.add( e4 );
+  e1.add( e2, e3 );
+  Object.defineProperty( this, "$", {
+    value: e1, writable: false, enumerable: true, configurable: false } );    
+  if( typeof dataContext !== 'object' ) return;
   e1.addEventListener("pointerdown", function() {
     that.dataContext.value = that.dataContext.value ? false : true;
+  });  
+  PropertyManager(v).on("reversed", function(value) {
+    if( value ) e1.classList.add("reversed");
+    else e1.classList.remove("reversed");
   });
-  Object.defineProperty( this, "$", {
-    value: e1, writable: false, enumerable: true, configurable: false } );
-  Object.defineProperty( this, "dataContext", {
-    get: function() { return this._dataContext; },
-    set: function(v) {
-      this._dataContext = v;
-      PropertyManager(v).on("reversed", function(value) {
-        if( value ) e1.classList.add("reversed");
-        else e1.classList.remove("reversed");
-      });
-      PropertyManager(v).on("selected", function(value) {
-        if( value ) e1.classList.add("selected");
-        else e1.classList.remove("selected");
-      });
-    },
-    writable: true, enumarable: true, configurable: false
+  PropertyManager(v).on("selected", function(value) {
+    if( value ) e1.classList.add("selected");
+    else e1.classList.remove("selected");
+  });
+  PropertyManager(v).on("textContent", function(value) {
+    e2.$.textContent = value;
   });
 }
 ```
