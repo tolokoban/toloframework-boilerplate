@@ -7,7 +7,7 @@ In MVVM pattern, views only know about ViewModel also known as DataContext.
 ## Usage
 ```js
 var Boilerplate = require("./toloframework-boilerplate");
-var code = Boilerplate.generateCodeFrom( viewDefinition, codeBehind );
+var code = Boilerplate.generateCodeFrom( viewDescription, codeBehind );
 ```
 
 The `viewDescription` argument is an object with this mandatory attribute: `viewDescription["0"] === 'view'`.
@@ -15,7 +15,7 @@ The `viewDescription` argument is an object with this mandatory attribute: `view
 ## Examples
 Permissive JSON:
 ```js
-{view ["Hello world!"]}
+{View DIV "Hello world!"}
 ```
 Generated code:
 ```js
@@ -31,7 +31,7 @@ module.exports = function() {
 ```
 Permissive JSON:
 ```js
-{view P ["Hello world!"]}
+{View P ["Hello world!"]}
 ```
 Generated code:
 ```js
@@ -48,7 +48,8 @@ module.exports = function() {
 ----
 Permissive JSON:
 ```js
-{view class: tfw-view-checkbox
+{View DIV
+      class: tfw-view-checkbox
       class.reversed: reversed
       class.selected: value
       event.pointerdown: {toggle value} [
@@ -93,7 +94,7 @@ module.exports = function(dataContext) {
 ----
 Permissive JSON:
 ```js
-{view [
+{View [
   {tfw.view.checkbox x:name: chk, text: "Button is enabled", value: {link enabled}}
   {BUTTON class.enabled: {link enabled}}
 ]}
@@ -102,7 +103,7 @@ Permissive JSON:
 Permissive JSON:
 ```js
 // dataContext == { pois: [{ grp: '', txt: ''}, ...] }
-{view x.content: {array
+{View x.content: {array
   source: {link pois, converter: makeTreeByGroups}
   template: {tfw.view.expandable text: {link: grp} content: {UL
     x.content: {array
