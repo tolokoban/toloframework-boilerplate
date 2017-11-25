@@ -13,6 +13,10 @@ var code = Boilerplate.generateCodeFrom( viewDescription, codeBehind );
 The `viewDescription` argument is an object with this mandatory attribute: `viewDescription["0"] === 'view'`.
 
 ## Examples
+
+
+
+## Old stuff to sort
 Permissive JSON:
 ```js
 {View DIV "Hello world!"}
